@@ -1,6 +1,5 @@
 
-setfenv(1, require'globals')
-local rand = require'random'
+setfenv(1, require'low')
 
 local n = 1e8
 local seed = 543
@@ -18,10 +17,10 @@ end
 
 local terra test_terra(n: int64)
 	var t0 = clock()
-	rand.randomseed(seed)
+	randomseed(seed)
 	var x = 0.0
 	for i=0,n do
-		var r = rand.random()
+		var r = random()
 		x = x + r
 	end
 	print('time:', clock() - t0, 'checksum:', x)

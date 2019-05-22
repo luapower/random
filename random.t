@@ -10,7 +10,7 @@
 
 if not ... then require'random_test'; return end
 
-local floor = terralib.includec'math.h'.floor
+setfenv(1, require'low')
 
 -- PRNG state.
 local struct RandomState {
@@ -69,9 +69,7 @@ local terra random(): double
 	return u.d - 1.0 -- d is a double in range [0, 1]
 end
 
-local rand = {}
-
-rand.random = macro(function(n, m)
+_M.random = macro(function(n, m)
 	if n and m then
 		return `floor(random()*(m-n+1.0)) + n -- range [n, m]
 	elseif n then
@@ -81,9 +79,9 @@ rand.random = macro(function(n, m)
 	end
 end, math.random)
 
-rand.randomseed = macro(function(n)
+_M.randomseed = macro(function(n)
 	n = n or 0
 	return `randomseed(n)
 end, math.randomseed)
 
-return rand
+return _M
