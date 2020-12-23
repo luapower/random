@@ -4,7 +4,7 @@
 	Written by Cosmin Apreutesei. Public Domain.
 	Translated from LuaJIT's lib_math.c Copyright (C) 2005-2017 Mike Pall.
 
-	TODO: how to use thread-load vars in Terra for the global RandomState?
+	TODO: how to use thread-local vars in Terra for the global RandomState?
 
 	This implements a Tausworthe PRNG with period 2^223. Based on:
 		Tables of maximally-equidistributed combined LFSR generators,
